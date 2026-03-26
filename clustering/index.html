@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SONAR Image Clustering - Interpretable SONAR Image Classifier</title>
+    <meta name="description" content="SONAR image clustering using unsupervised learning techniques for underwater object segmentation and feature extraction. Supports K-means, DBSCAN, and hierarchical clustering.">
+    <meta name="keywords" content="SONAR image clustering, underwater object segmentation, unsupervised learning, K-means clustering, DBSCAN, feature extraction, seabed segmentation, anomaly detection">
+    <meta name="author" content="Purushothaman Natarajan, Athira Nambiar">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://purushothaman-natarajan.github.io/Interpretable-SONAR-Image-Classifier/clustering/">
+    <meta property="og:title" content="SONAR Image Clustering - Interpretable SONAR Image Classifier">
+    <meta property="og:description" content="SONAR image clustering using unsupervised learning techniques">
+    <meta property="og:url" content="https://purushothaman-natarajan.github.io/Interpretable-SONAR-Image-Classifier/clustering/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SONAR Image Clustering">
+    <meta name="twitter:description" content="Unsupervised learning for underwater SONAR image analysis">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a2540;
+            --secondary: #00d4ff;
+            --accent: #00a8cc;
+            --light: #f6f9fc;
+            --dark: #1a1a2e;
+            --text: #4a5568;
+            --white: #ffffff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--text); background: var(--light); }
+        header { background: linear-gradient(135deg, var(--primary) 0%, #1a365d 100%); padding: 1rem 2rem; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: var(--white); font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
+        .logo i { color: var(--secondary); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: var(--white); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--secondary); }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, #1a365d 100%); padding: 8rem 2rem 4rem; text-align: center; color: var(--white); }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.1rem; max-width: 700px; margin: 0 auto 2rem; opacity: 0.9; }
+        .section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; margin-bottom: 3rem; }
+        .section-title h2 { font-size: 2rem; color: var(--primary); margin-bottom: 1rem; }
+        .section-title p { color: var(--text); max-width: 600px; margin: 0 auto; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .feature-card { background: var(--white); padding: 2rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+        .feature-icon { width: 50px; height: 50px; background: linear-gradient(135deg, var(--secondary), var(--accent)); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+        .feature-icon i { font-size: 1.25rem; color: var(--white); }
+        .feature-card h3 { color: var(--primary); margin-bottom: 0.75rem; font-size: 1.1rem; }
+        .feature-card p { font-size: 0.95rem; }
+        .methods-section { background: var(--white); padding: 4rem 2rem; }
+        .methods-container { max-width: 1200px; margin: 0 auto; }
+        .method-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .method-card { background: var(--light); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--secondary); }
+        .method-card h3 { color: var(--primary); margin-bottom: 0.5rem; }
+        .method-card code { background: #e2e8f0; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.85rem; }
+        .code-section { padding: 3rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .code-block { background: #1e1e1e; border-radius: 12px; overflow: hidden; margin: 1.5rem 0; }
+        .code-header { background: #2d2d2d; padding: 0.75rem 1.5rem; color: #888; font-size: 0.85rem; }
+        .code-content { padding: 1.25rem; overflow-x: auto; }
+        .code-content pre { color: #d4d4d4; font-family: 'Fira Code', monospace; font-size: 0.85rem; margin: 0; }
+        .cta-section { background: linear-gradient(135deg, var(--secondary), var(--accent)); padding: 3rem 2rem; text-align: center; color: var(--primary); }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .btn-primary { background: var(--primary); color: var(--white); }
+        .btn-primary:hover { background: #1a365d; transform: translateY(-2px); }
+        footer { background: var(--dark); color: var(--white); padding: 2rem; text-align: center; }
+        footer a { color: var(--secondary); text-decoration: none; }
+        .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
+        .social-links a { color: var(--white); font-size: 1.25rem; transition: color 0.3s; }
+        .social-links a:hover { color: var(--secondary); }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.75rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"><i class="fas fa-water"></i> SONAR Classifier</div>
+            <ul class="nav-links">
+                <li><a href="../">Home</a></li>
+                <li><a href="../#features">Features</a></li>
+                <li><a href="../#models">Models</a></li>
+                <li><a href="https://arxiv.org/abs/2408.12837" target="_blank">Paper</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1><i class="fas fa-project-diagram"></i> SONAR Image Clustering</h1>
+        <p>Unsupervised learning techniques for segmenting and clustering underwater SONAR images</p>
+        <a href="../" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to Classifier</a>
+    </section>
+
+    <section class="section">
+        <div class="section-title">
+            <h2>Clustering Features</h2>
+            <p>Advanced unsupervised algorithms for underwater image analysis</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                <h3>K-Means Clustering</h3>
+                <p>Partition SONAR images into K clusters based on pixel intensity and texture features for seabed segmentation.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-circle-notch"></i></div>
+                <h3>DBSCAN</h3>
+                <p>Density-based clustering for identifying anomalies and irregular structures in underwater SONAR imagery.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-sitemap"></i></div>
+                <h3>Hierarchical Clustering</h3>
+                <p>Agglomerative and divisive clustering for discovering nested structures in SONAR image regions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-palette"></i></div>
+                <h3>Feature Extraction</h3>
+                <p>CNN-based feature embeddings for clustering, using pre-trained model representations as cluster inputs.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-eye"></i></div>
+                <h3>Visualization</h3>
+                <p>PCA, t-SNE, and UMAP projections for visualizing high-dimensional clustering results.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-sliders-h"></i></div>
+                <h3>Auto Parameter Tuning</h3>
+                <p>Automatic selection of optimal cluster count using silhouette score and elbow method.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="methods-section">
+        <div class="methods-container">
+            <div class="section-title">
+                <h2>Supported Methods</h2>
+            </div>
+            <div class="method-cards">
+                <div class="method-card">
+                    <h3>K-Means</h3>
+                    <p>Partition method using <code>k</code> centroids</p>
+                </div>
+                <div class="method-card">
+                    <h3>Mini-Batch K-Means</h3>
+                    <p>Fast K-means for large datasets</p>
+                </div>
+                <div class="method-card">
+                    <h3>DBSCAN</h3>
+                    <p>Density-based spatial clustering</p>
+                </div>
+                <div class="method-card">
+                    <h3>HDBSCAN</h3>
+                    <p>Hierarchical DBSCAN</p>
+                </div>
+                <div class="method-card">
+                    <h3>Spectral Clustering</h3>
+                    <p>Graph-based clustering</p>
+                </div>
+                <div class="method-card">
+                    <h3>Agglomerative</h3>
+                    <p>Hierarchical bottom-up</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="code-section">
+        <div class="section-title">
+            <h2>Quick Start</h2>
+        </div>
+        <h3>Run Clustering</h3>
+        <div class="code-block">
+            <div class="code-header"><i class="fas fa-terminal"></i> Terminal</div>
+            <div class="code-content">
+                <pre><code>from clustering import SONARClusterer
+
+clusterer = SONARClusterer(method='kmeans', n_clusters=5)
+labels = clusterer.fit_transform('sonar_images/')
+clusterer.visualize()</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Integrate with Classifier</h2>
+        <p>Combine clustering with explainable classification for complete underwater analysis</p>
+        <a href="../" class="btn btn-primary"><i class="fas fa-random"></i> Try Combined Pipeline</a>
+    </section>
+
+    <footer>
+        <p>Interpretable-SONAR-Image-Classifier &copy; 2024</p>
+        <div class="social-links">
+            <a href="https://github.com/Purushothaman-natarajan/Interpretable-SONAR-Image-Classifier" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/purushothamann" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://arxiv.org/abs/2408.12837" target="_blank"><i class="fas fa-file-pdf"></i></a>
+        </div>
+    </footer>
+</body>
+</html>

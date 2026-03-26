@@ -274,3 +274,8 @@ If you use our SONAR classifier or the explainer in your research, please use th
   year={2024}
 }
 ```
+
+## Related Projects
+
+- [SONAR Image Clustering](https://purushothaman-natarajan.github.io/Interpretable-SONAR-Image-Classifier/clustering/) - Unsupervised learning for SONAR image segmentation
+```

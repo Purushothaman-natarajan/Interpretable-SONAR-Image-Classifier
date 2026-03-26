@@ -4,6 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interpretable SONAR Image Classifier</title>
+    <meta name="description" content="Explainable AI for Underwater SONAR Image Classification using LIME, SHAP, and Grad-CAM with Transfer Learning. Deep learning with model interpretability for defense and underwater object detection.">
+    <meta name="keywords" content="SONAR image classification, underwater object detection, XAI, explainable AI, LIME, SHAP, Grad-CAM, deep learning, CNN, transfer learning, VGG16, ResNet50, DenseNet121, underwater imaging, seabed classification, mine detection">
+    <meta name="author" content="Purushothaman Natarajan, Athira Nambiar">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://purushothaman-natarajan.github.io/Interpretable-SONAR-Image-Classifier/">
+    <link rel="alternate" hreflang="en" href="https://purushothaman-natarajan.github.io/Interpretable-SONAR-Image-Classifier/">
+    <meta property="og:title" content="Interpretable SONAR Image Classifier">
+    <meta property="og:description" content="Explainable AI for Underwater SONAR Image Classification using LIME, SHAP, and Grad-CAM">
+    <meta property="og:url" content="https://purushothaman-natarajan.github.io/Interpretable-SONAR-Image-Classifier/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Interpretable-SONAR-Image-Classifier">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Interpretable SONAR Image Classifier">
+    <meta name="twitter:description" content="Explainable AI for Underwater SONAR Image Classification using LIME, SHAP, and Grad-CAM">
+    <meta name="citation_title" content="Underwater SONAR Image Classification and Analysis using LIME-based Explainable Artificial Intelligence">
+    <meta name="citation_author" content="Purushothaman Natarajan">
+    <meta name="citation_author" content="Athira Nambiar">
+    <meta name="citation_publication_date" content="2024/08/23">
+    <meta name="citation_arxiv_id" content="2408.12837">
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": "Interpretable-SONAR-Image-Classifier",
+        "description": "Explainable AI for Underwater SONAR Image Classification using LIME, SHAP, and Grad-CAM with Transfer Learning",
+        "url": "https://github.com/Purushothaman-natarajan/Interpretable-SONAR-Image-Classifier",
+        "author": [
+            {"@type": "Person", "name": "Purushothaman Natarajan"},
+            {"@type": "Person", "name": "Athira Nambiar"}
+        ],
+        "programmingLanguage": "Python",
+        "datePublished": "2024-08-23",
+        "keywords": ["SONAR image classification", "XAI", "LIME", "deep learning", "transfer learning"]
+    }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -422,6 +458,7 @@
                 <li><a href="#models">Models</a></li>
                 <li><a href="#architecture">Architecture</a></li>
                 <li><a href="#code">Usage</a></li>
+                <li><a href="clustering/">Clustering</a></li>
                 <li><a href="https://arxiv.org/abs/2408.12837" target="_blank">Paper</a></li>
             </ul>
         </nav>
@@ -467,6 +504,12 @@
                 <h3>SP-LIME Support</h3>
                 <p>Submodular Picks LIME for selecting representative superpixels and generating comprehensive visual explanations of model decisions.</p>
             </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h3>Image Clustering</h3>
+                <p>Unsupervised learning for SONAR image segmentation using K-Means, DBSCAN, and hierarchical clustering. <a href="/clustering/" style="color:var(--accent)">Learn more</a></p>
             <div class="feature-card">
                 <div class="feature-icon">
                     <i class="fas fa-images"></i>

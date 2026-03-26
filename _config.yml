@@ -1,0 +1,15 @@
+title: Interpretable SONAR Image Classifier
+description: Explainable AI for Underwater SONAR Image Classification using LIME, SHAP, and Grad-CAM
+url: https://purushothaman-natarajan.github.io/Interpretable-SONAR-Image-Classifier
+author: Purushothaman Natarajan
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-robots
+
+collections:
+  pages:
+    output: true
+    permalink: /:name/
+
+markdown: kramdown
