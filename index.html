@@ -323,12 +323,13 @@
         
         .arch-flow {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             justify-content: center;
             align-items: center;
             gap: 1rem;
-            max-width: 900px;
-            margin: 0 auto;
+            max-width: 100%;
+            overflow-x: auto;
+            padding: 1rem 0;
         }
         
         .arch-box {
